@@ -65,8 +65,8 @@ public class DAOGenerico extends ClsConexion{
         return super.ejecutar(consulta);
     }
      
-     public ResultSet listar(String tabla) {
-        String consulta = "select * from " + tabla;
+     public ResultSet listar(String tabla, int numPreguntas) {
+        String consulta = "select * from " + tabla + " where ROWNUM <= " + numPreguntas;
         super.ejecutarRetorno(consulta);
         return resultadoDB;
     }

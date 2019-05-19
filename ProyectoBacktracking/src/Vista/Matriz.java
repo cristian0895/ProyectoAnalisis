@@ -21,6 +21,7 @@ public class Matriz extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
+    FrmPreguntas p;
     ArrayList<Pregunta> list;
     Evaluacion ev;
     CrearPreguntas cp;
@@ -28,21 +29,18 @@ public class Matriz extends javax.swing.JFrame {
     static int columna;
     static int numPreguntas;
     int[][] matriz;
-    Pregunta pre;
-
+   
     public Matriz() {
         initComponents();
-
+         p = new FrmPreguntas();
 //        fila = Integer.parseInt(txtFila.getText());
 //        columna = Integer.parseInt(txtColumna.getText());
 //        numPreguntas = Integer.parseInt(txtNumPreguntas.getText());
         list = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            pre = new Pregunta(i + "", i, i, i, "");
-            list.add(pre);
-        }
+       
         lblTotalBanco.setText(list.size() + "");
         listarPreguntas();
+        
 
     }
 
@@ -62,33 +60,12 @@ public class Matriz extends javax.swing.JFrame {
         btnCrearExamen = new javax.swing.JButton();
         LblTotal = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        txtPregunta = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        btnCrearPregunta = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblPreguntas = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         lblTotalBanco = new javax.swing.JLabel();
         btnCrearXPreguntas = new javax.swing.JButton();
-        jPanel6 = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        txtDiagSuperIz = new javax.swing.JTextArea();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        txtDiagSupDere = new javax.swing.JTextArea();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        txtIzquier = new javax.swing.JTextArea();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        txtSuperior = new javax.swing.JTextArea();
-        jScrollPane9 = new javax.swing.JScrollPane();
-        txtDiagInfeIzquier = new javax.swing.JTextArea();
-        jScrollPane10 = new javax.swing.JScrollPane();
-        txtAbajo = new javax.swing.JTextArea();
-        jScrollPane11 = new javax.swing.JScrollPane();
-        txtDiagInfeDere = new javax.swing.JTextArea();
-        jScrollPane12 = new javax.swing.JScrollPane();
-        txtDerecha = new javax.swing.JTextArea();
-        jScrollPane13 = new javax.swing.JScrollPane();
-        txtExamenActual = new javax.swing.JTextArea();
+        cbPreguntas = new javax.swing.JComboBox<>();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblExamenes = new javax.swing.JTable();
@@ -127,9 +104,7 @@ public class Matriz extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(LblTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(LblTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -176,16 +151,6 @@ public class Matriz extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pregunta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 3, 18))); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel4.setText("Ingrese la pregunta:");
-
-        btnCrearPregunta.setText("Crear Pregunta");
-        btnCrearPregunta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCrearPreguntaActionPerformed(evt);
-            }
-        });
-
         tblPreguntas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tblPreguntas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -205,12 +170,14 @@ public class Matriz extends javax.swing.JFrame {
 
         jLabel7.setText("Preguntas en el banco");
 
-        btnCrearXPreguntas.setText("Crear x Preguntas");
+        btnCrearXPreguntas.setText("Listar Preguntas");
         btnCrearXPreguntas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearXPreguntasActionPerformed(evt);
             }
         });
+
+        cbPreguntas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "100", "1000", "10000", "100000" }));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -221,28 +188,21 @@ public class Matriz extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPregunta)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCrearPregunta)
-                        .addGap(50, 50, 50)
-                        .addComponent(btnCrearXPreguntas)
-                        .addGap(37, 37, 37))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblTotalBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(lblTotalBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(btnCrearXPreguntas)
+                        .addGap(70, 70, 70)
+                        .addComponent(cbPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCrearPregunta)
-                    .addComponent(btnCrearXPreguntas))
+                    .addComponent(btnCrearXPreguntas)
+                    .addComponent(cbPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
@@ -250,86 +210,6 @@ public class Matriz extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-        );
-
-        txtDiagSuperIz.setColumns(20);
-        txtDiagSuperIz.setRows(5);
-        jScrollPane5.setViewportView(txtDiagSuperIz);
-
-        txtDiagSupDere.setColumns(20);
-        txtDiagSupDere.setRows(5);
-        jScrollPane6.setViewportView(txtDiagSupDere);
-
-        txtIzquier.setColumns(20);
-        txtIzquier.setRows(5);
-        jScrollPane7.setViewportView(txtIzquier);
-
-        txtSuperior.setColumns(20);
-        txtSuperior.setRows(5);
-        jScrollPane8.setViewportView(txtSuperior);
-
-        txtDiagInfeIzquier.setColumns(20);
-        txtDiagInfeIzquier.setRows(5);
-        jScrollPane9.setViewportView(txtDiagInfeIzquier);
-
-        txtAbajo.setColumns(20);
-        txtAbajo.setRows(5);
-        jScrollPane10.setViewportView(txtAbajo);
-
-        txtDiagInfeDere.setColumns(20);
-        txtDiagInfeDere.setRows(5);
-        jScrollPane11.setViewportView(txtDiagInfeDere);
-
-        txtDerecha.setColumns(20);
-        txtDerecha.setRows(5);
-        jScrollPane12.setViewportView(txtDerecha);
-
-        txtExamenActual.setColumns(20);
-        txtExamenActual.setRows(5);
-        jScrollPane13.setViewportView(txtExamenActual);
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                    .addComponent(jScrollPane7)
-                    .addComponent(jScrollPane9))
-                .addGap(34, 34, 34)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(37, 37, 37)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Examenes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 3, 18))); // NOI18N
@@ -377,9 +257,7 @@ public class Matriz extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -387,15 +265,10 @@ public class Matriz extends javax.swing.JFrame {
                 .addGap(7, 7, 7)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5))
         );
 
         pack();
@@ -429,15 +302,6 @@ public class Matriz extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCrearSalonActionPerformed
 
-    private void btnCrearPreguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearPreguntaActionPerformed
-        String pregunta = txtPregunta.getText();
-//        list.add(pregunta);
-
-        lblTotalBanco.setText(list.size() + "");
-        txtPregunta.setText("");
-        listarPreguntas();
-    }//GEN-LAST:event_btnCrearPreguntaActionPerformed
-
     private void btnCrearExamenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearExamenActionPerformed
 
         ev = new Evaluacion(fila, columna, numPreguntas, list);
@@ -460,23 +324,28 @@ public class Matriz extends javax.swing.JFrame {
     }//GEN-LAST:event_tblPreguntasMouseClicked
 
     private void tblExamenesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblExamenesMouseClicked
-        txtDiagSuperIz.setText("");
-        txtSuperior.setText("");
-        txtDiagSupDere.setText("");
-        txtIzquier.setText("");
-        txtDerecha.setText("");
-        txtDiagInfeIzquier.setText("");
-        txtAbajo.setText("");
-        txtDiagInfeDere.setText("");
+        
+        p.setLocationRelativeTo(null);
+        p.setVisible(true);
+        FrmPreguntas.txtDiagSuperIz.setText("");
+        FrmPreguntas.txtSuperior.setText("");
+        FrmPreguntas.txtDiagSupDere.setText("");
+        FrmPreguntas.txtIzquier.setText("");
+        FrmPreguntas.txtDerecha.setText("");
+        FrmPreguntas.txtDiagInfeIzquier.setText("");
+        FrmPreguntas.txtAbajo.setText("");
+        FrmPreguntas.txtDiagInfeDere.setText("");
         int iRow = tblExamenes.rowAtPoint(evt.getPoint());
         int iCol = tblExamenes.columnAtPoint(evt.getPoint());
 
-//        ev.mostrarAlrededor(iRow, iCol, numPreguntas);
+        ev.mostrarAlrededor(iRow, iCol, numPreguntas);
     }//GEN-LAST:event_tblExamenesMouseClicked
 
     private void btnCrearXPreguntasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearXPreguntasActionPerformed
         // TODO add your handling code here:        
-        cp = new CrearPreguntas(list);
+        list.clear();
+        int numPreguntas= Integer.parseInt(cbPreguntas.getSelectedItem().toString());
+        cp = new CrearPreguntas(list,numPreguntas);
         cp.SolicitudListarArrayList();
         listarPreguntas();
         lblTotalBanco.setText(list.size() + "");
@@ -522,46 +391,25 @@ public class Matriz extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LblTotal;
     private javax.swing.JButton btnCrearExamen;
-    private javax.swing.JButton btnCrearPregunta;
     private javax.swing.JButton btnCrearSalon;
     private javax.swing.JButton btnCrearXPreguntas;
+    private javax.swing.JComboBox<String> cbPreguntas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JScrollPane jScrollPane10;
-    private javax.swing.JScrollPane jScrollPane11;
-    private javax.swing.JScrollPane jScrollPane12;
-    private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JLabel lblTotalBanco;
     public static javax.swing.JTable tblExamenes;
     private javax.swing.JTable tblPreguntas;
-    public static javax.swing.JTextArea txtAbajo;
     private javax.swing.JTextField txtColumna;
-    public static javax.swing.JTextArea txtDerecha;
-    public static javax.swing.JTextArea txtDiagInfeDere;
-    public static javax.swing.JTextArea txtDiagInfeIzquier;
-    public static javax.swing.JTextArea txtDiagSupDere;
-    public static javax.swing.JTextArea txtDiagSuperIz;
-    public static javax.swing.JTextArea txtExamenActual;
     private javax.swing.JTextField txtFila;
-    public static javax.swing.JTextArea txtIzquier;
     private javax.swing.JTextField txtNumPreguntas;
-    private javax.swing.JTextField txtPregunta;
-    public static javax.swing.JTextArea txtSuperior;
     // End of variables declaration//GEN-END:variables
 
     public void listarPreguntas() {
