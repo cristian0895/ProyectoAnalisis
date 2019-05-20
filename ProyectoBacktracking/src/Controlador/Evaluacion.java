@@ -602,25 +602,6 @@ public class Evaluacion {
             if (pila.pop().getTexto().equals(id)) {
                 pregunta = new Pregunta(pila.pop().getTexto(), pila.pop().getDificultad(), pila.pop().getTiempo(), pila.pop().getTema_id(), pila.pop().getFECHA_CREACION());
                 break;
-        // Mientras hayan objetos 
-        while (parcial < pesoMax && i < bancoPreguntas.size()) {
-            //busca el primer posible objeto
-            while (i < bancoPreguntas.size() && (parcial + bancoPreguntas.get(i).getDificultad()) > pesoMax && bancoPreguntas.get(i).getTiempo()> 0) {
-                i++;
-            }
-            //en caso de encontrar un objeto
-            if (i < bancoPreguntas.size()) {
-                //Determina la cantidad de objetos que necesesitaria
-                k = (pesoMax - parcial) / bancoPreguntas.get(i).getDificultad();
-                //en caso de que exista la cantidad 
-                
-                // asignacion de 
-                aux[i] += k;
-                //se suma el valor el peso total del container
-                parcial += bancoPreguntas.get(i).getDificultad() * k;
-            } else {
-                // en caso de no encontrar mas objetos 
-                parcial = pesoMax;
             }
         }
         long fin = System.nanoTime();
@@ -664,6 +645,16 @@ public class Evaluacion {
             if (pregun.get(i).getTexto().equals(id)) {
                 preg = new Pregunta(pregun.get(i).getTexto(), pregun.get(i).getDificultad(), pregun.get(i).getTiempo(), pregun.get(i).getTema_id(), pregun.get(i).getFECHA_CREACION());
     //utilizar en caso de error
+            }
+        }
+        long fin = System.nanoTime();
+//
+        long tiempo = fin - inicio;
+
+        System.out.println(tiempo + " Busqueda ArrayList  Nanosegundos");
+
+        return preg;
+    }
     public double[] llenarContiner(int pesoMax, int tipo) {
         double[] aux = new double[bancoPreguntas.size()];
         int parcial = 0;
@@ -692,13 +683,7 @@ public class Evaluacion {
                 parcial = pesoMax;
             }
         }
-        long fin = System.nanoTime();
-
-        long tiempo = fin - inicio;
-
-        System.out.println(tiempo + " Busqueda ArrayList  Nanosegundos");
-
-        return preg;
+//        
     }
     /**
      * 
@@ -728,3 +713,5 @@ public class Evaluacion {
         return pregu;
     }
 }
+
+
