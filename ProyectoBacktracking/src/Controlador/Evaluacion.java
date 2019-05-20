@@ -611,6 +611,9 @@ public class Evaluacion {
 
         return pregunta;
     }
+       
+        
+    
 
     public Pregunta busquedaenArray(int cantidadPregunta, String id) {
         long inicio = System.nanoTime();
@@ -644,17 +647,19 @@ public class Evaluacion {
         for (int i = 0; i < pregun.size(); i++) {
             if (pregun.get(i).getTexto().equals(id)) {
                 preg = new Pregunta(pregun.get(i).getTexto(), pregun.get(i).getDificultad(), pregun.get(i).getTiempo(), pregun.get(i).getTema_id(), pregun.get(i).getFECHA_CREACION());
-    //utilizar en caso de error
             }
         }
         long fin = System.nanoTime();
-//
+
         long tiempo = fin - inicio;
 
         System.out.println(tiempo + " Busqueda ArrayList  Nanosegundos");
 
         return preg;
     }
+    //utilizar en caso de error
+    
+    
     public double[] llenarContiner(int pesoMax, int tipo) {
         double[] aux = new double[bancoPreguntas.size()];
         int parcial = 0;
@@ -682,8 +687,31 @@ public class Evaluacion {
                 // en caso de no encontrar mas objetos 
                 parcial = pesoMax;
             }
+            
         }
-//        
+         // Mientras hayan objetos 
+        while (parcial < pesoMax && i < bancoPreguntas.size()) {
+            //busca el primer posible objeto
+            while (i < bancoPreguntas.size() && (parcial + bancoPreguntas.get(i).getDificultad()) > pesoMax && bancoPreguntas.get(i).getTiempo()> 0) {
+                i++;
+            }
+            //en caso de encontrar un objeto
+            if (i < bancoPreguntas.size()) {
+                //Determina la cantidad de objetos que necesesitaria
+                k = (pesoMax - parcial) / bancoPreguntas.get(i).getDificultad();
+                //en caso de que exista la cantidad 
+                
+                // asignacion de 
+                aux[i] += k;
+                //se suma el valor el peso total del container
+                parcial += bancoPreguntas.get(i).getDificultad() * k;
+            } else {
+                // en caso de no encontrar mas objetos 
+                parcial = pesoMax;
+            }
+        }
+        double[] asd={2,2,2};
+        return asd;
     }
     /**
      * 
