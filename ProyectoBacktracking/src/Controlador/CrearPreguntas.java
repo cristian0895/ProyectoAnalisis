@@ -8,9 +8,12 @@ package Controlador;
 import DAO.DAOGenerico;
 import Modelo.ClsConexion;
 import Modelo.Pregunta;
+import Vista.Matriz;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -80,6 +83,6 @@ public class CrearPreguntas {
         } catch (SQLException ex) {
             System.out.println("Esto se tosto");
         }
-
+        
     }
 }

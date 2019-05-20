@@ -10,6 +10,10 @@ import Modelo.Pregunta;
 import Vista.FrmPreguntas;
 import Vista.Matriz;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.Stack;
+import java.util.TreeSet;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -92,10 +96,10 @@ public class Evaluacion {
                     }
                 }
                 if (aux) {
-                return true;
+                    return true;
+                }
             }
-            }
-             return false;
+            return false;
         } catch (Exception e) {
             return false;
         }
@@ -936,75 +940,226 @@ public class Evaluacion {
         //return arregloDesorden;
     }
 
-    public double[] llenarContainer(int pesoMax, int tipo) {
-        double[] aux = new double[bancoPreguntas.size()];
-        int parcial = 0;
-        int i = 0;
-        double k;
-
-        // Mientras hayan objetos 
-        while (parcial < pesoMax && i < bancoPreguntas.size()) {
-            //busca el primer posible objeto
-            while (i < bancoPreguntas.size() && (parcial + bancoPreguntas.get(i).getPeso()) > pesoMax && bancoPreguntas.get(i).getValor() > 0) {
-                i++;
-            }
-            //en caso de encontrar un objeto
-            if (i < bancoPreguntas.size()) {
-                //Determina la cantidad de objetos que necesesitaria
-                k = (pesoMax - parcial) / bancoPreguntas.get(i).getDificultad();
-                //en caso de que exista la cantidad 
-                if (k > bancoPreguntas.get(i).get) {
-                    //se agrega al auxiliar la cantidad de los productos
-                    k = bancoPreguntas.get(i).getCantidad();
-                }
-                // asignacion de 
-                aux[i] += k;
-                //se suma el valor el peso total del container
-                parcial += bancoPreguntas.get(i).getPeso() * k;
-            } else {
-                // en caso de no encontrar mas objetos 
-                parcial = pesoMax;
-            }
-            //iterador
-            i++;
-        }
-        return aux;
-    }
-
+//    public double[] llenarContainer(int pesoMax, int tipo) {
+//        double[] aux = new double[bancoPreguntas.size()];
+//        int parcial = 0;
+//        int i = 0;
+//        double k;
+//
+//        // Mientras hayan objetos 
+//        while (parcial < pesoMax && i < bancoPreguntas.size()) {
+//            //busca el primer posible objeto
+//            while (i < bancoPreguntas.size() && (parcial + bancoPreguntas.get(i).getPeso()) > pesoMax && bancoPreguntas.get(i).getValor() > 0) {
+//                i++;
+//            }
+//            //en caso de encontrar un objeto
+//            if (i < bancoPreguntas.size()) {
+//                //Determina la cantidad de objetos que necesesitaria
+//                k = (pesoMax - parcial) / bancoPreguntas.get(i).getDificultad();
+//                //en caso de que exista la cantidad 
+//                if (k > bancoPreguntas.get(i).get) {
+//                    //se agrega al auxiliar la cantidad de los productos
+//                    k = bancoPreguntas.get(i).getCantidad();
+//                }
+//                // asignacion de 
+//                aux[i] += k;
+//                //se suma el valor el peso total del container
+//                parcial += bancoPreguntas.get(i).getPeso() * k;
+//            } else {
+//                // en caso de no encontrar mas objetos 
+//                parcial = pesoMax;
+//            }
+//            //iterador
+//            i++;
+//        }
+//        return aux;
+//    }
     //utilizar en caso de error
-    public double[] llenarContiner(int pesoMax, int tipo) {
-        double[] aux = new double[bancoPreguntas.size()];
-        int parcial = 0;
-        int i = 0;
-        double k;
+//    public double[] llenarContiner(int pesoMax, int tipo) {
+//        double[] aux = new double[bancoPreguntas.size()];
+//        int parcial = 0;
+//        int i = 0;
+//        double k;
+//
+//        // Mientras hayan objetos 
+//        while (parcial < pesoMax && i < bancoPreguntas.size()) {
+//            //busca el primer posible objeto
+//            while (i < bancoPreguntas.size() && (parcial + (tipo == 1 ? bancoPreguntas.get(i).getPeso() : bancoPreguntas.get(i).getValor())) > pesoMax && listaObjetos.get(i).getValor() > 0) {
+//                i++;
+//            }
+//            //en caso de encontrar un objeto
+//            if (i < listaObjetos.size()) {
+//                //Determina la cantidad de objetos que necesesitaria
+//                k = (pesoMax - parcial) / (tipo == 1 ? bancoPreguntas.get(i).getPeso() : bancoPreguntas.get(i).getValor());
+//                //en caso de que exista la cantidad 
+//                if (k > bancoPreguntas.get(i).getCantidad()) {
+//                    //se al auxiliar la cantidad de los productos
+//                    k = bancoPreguntas.get(i).getCantidad();
+//                }
+//                // asignacion de 
+//                aux[i] += k;
+//                //se suma el valor el peso total del container
+//                parcial += (tipo == 1 ? bancoPreguntas.get(i).getPeso() : bancoPreguntas.get(i).getValor()) * k;
+//            } else {
+//                // en caso de no encontrar mas objetos 
+//                parcial = pesoMax;
+//            }
+//            //iterador
+//            i++;
+//        }
+//        return aux;
+//    }
+//    Metodos de creacion 
+    public void crearenPilar(int cantidadPregunta) throws InterruptedException {
+        long inicio = System.nanoTime();
+        Stack<Pregunta> pila = new Stack<Pregunta>();
 
-        // Mientras hayan objetos 
-        while (parcial < pesoMax && i < bancoPreguntas.size()) {
-            //busca el primer posible objeto
-            while (i < bancoPreguntas.size() && (parcial + (tipo == 1 ? bancoPreguntas.get(i).getPeso() : bancoPreguntas.get(i).getValor())) > pesoMax && listaObjetos.get(i).getValor() > 0) {
-                i++;
-            }
-            //en caso de encontrar un objeto
-            if (i < listaObjetos.size()) {
-                //Determina la cantidad de objetos que necesesitaria
-                k = (pesoMax - parcial) / (tipo == 1 ? bancoPreguntas.get(i).getPeso() : bancoPreguntas.get(i).getValor());
-                //en caso de que exista la cantidad 
-                if (k > bancoPreguntas.get(i).getCantidad()) {
-                    //se al auxiliar la cantidad de los productos
-                    k = bancoPreguntas.get(i).getCantidad();
-                }
-                // asignacion de 
-                aux[i] += k;
-                //se suma el valor el peso total del container
-                parcial += (tipo == 1 ? bancoPreguntas.get(i).getPeso() : bancoPreguntas.get(i).getValor()) * k;
-            } else {
-                // en caso de no encontrar mas objetos 
-                parcial = pesoMax;
-            }
-            //iterador
-            i++;
+        for (int i = 0; i < cantidadPregunta; i++) {
+
+            pila.push(bancoPreguntas.get(i));
         }
-        return aux;
+
+        long fin = System.nanoTime();
+
+        long tiempo = fin - inicio;
+
+        System.out.println(tiempo + "Pila Nanosegundos");
+
+//        while (!pila.isEmpty()) { // mostrar pila completa
+//            System.out.println(pila.pop().getTitulo()); // extrae un elemento de la pila
+//        }
     }
 
+    public void crearenArray(int cantidadPregunta) {
+        long inicio = System.nanoTime();
+        Pregunta[] array = new Pregunta[cantidadPregunta];
+        for (int i = 0; i < cantidadPregunta; i++) {
+            array[i] = bancoPreguntas.get(i);
+        }
+        long fin = System.nanoTime();
+
+        long tiempo = fin - inicio;
+
+        System.out.println(tiempo + "Array  Nanosegundos");
+    }
+
+    public void crearenArrayList(int cantidadPregunta) {
+        long inicio = System.nanoTime();
+        ArrayList<Pregunta> pregun = new ArrayList<>();
+        for (int i = 0; i < cantidadPregunta; i++) {
+            pregun.add(bancoPreguntas.get(i));
+        }
+        long fin = System.nanoTime();
+
+        long tiempo = fin - inicio;
+
+        System.out.println(tiempo + "ArrayList  Nanosegundos");
+    }
+
+    public void crearenArbol(int cantidadPregunta) {
+        TreeSet<String> treeSet = new TreeSet<>();
+        long inicio = System.nanoTime();
+        for (int i = 0; i < cantidadPregunta; i++) {
+            treeSet.add(bancoPreguntas.get(i).getTexto());
+        }
+        long fin = System.nanoTime();
+
+        long tiempo = fin - inicio;
+
+        System.out.println(tiempo + "Arbol  Nanosegundos");
+    }
+//  Busqueda en los diferentes tipos de datos
+
+    public Pregunta busquedaenPila(int cantidadPregunta, String id) {
+        long inicio = System.nanoTime();
+        Pregunta pregunta = null;
+        Stack<Pregunta> pila = new Stack<Pregunta>();
+
+        for (int i = 0; i < cantidadPregunta; i++) {
+
+            pila.push(bancoPreguntas.get(i));
+        }
+        while (!pila.isEmpty()) { // mostrar pila completa
+            if (pila.pop().getTexto().equals(id)) {
+                pregunta = new Pregunta(pila.pop().getTexto(), pila.pop().getDificultad(), pila.pop().getTiempo(), pila.pop().getTema_id(), pila.pop().getFECHA_CREACION());
+                break;
+            }
+        }
+        long fin = System.nanoTime();
+
+        long tiempo = fin - inicio;
+        System.out.println(tiempo + "Busqueda Pila Nanosegundos");
+
+        return pregunta;
+    }
+
+    public Pregunta busquedaenArray(int cantidadPregunta, String id) {
+        long inicio = System.nanoTime();
+        Pregunta pregun = null;
+        Pregunta[] array = new Pregunta[cantidadPregunta];
+        for (int i = 0; i < cantidadPregunta; i++) {
+            array[i] = bancoPreguntas.get(i);
+        }
+
+        for (int i = 0; i < array.length; i++) {
+            if (array[i].getTexto().equals(id)) {
+                pregun = new Pregunta(array[i].getTexto(), array[i].getTiempo(), array[i].getTiempo(), array[i].getTema_id(), array[i].getFECHA_CREACION());
+            }
+        }
+        long fin = System.nanoTime();
+
+        long tiempo = fin - inicio;
+
+        System.out.println(tiempo + "Busqueda Array  Nanosegundos");
+
+        return pregun;
+    }
+
+    public Pregunta busquedaenArrayList(int cantidadPregunta, String id) {
+        long inicio = System.nanoTime();
+        Pregunta preg = null;
+        ArrayList<Pregunta> pregun = new ArrayList<>();
+        for (int i = 0; i < cantidadPregunta; i++) {
+            pregun.add(bancoPreguntas.get(i));
+        }
+        for (int i = 0; i < pregun.size(); i++) {
+            if (pregun.get(i).getTexto().equals(id)) {
+                preg = new Pregunta(pregun.get(i).getTexto(), pregun.get(i).getDificultad(), pregun.get(i).getTiempo(), pregun.get(i).getTema_id(), pregun.get(i).getFECHA_CREACION());
+            }
+        }
+        long fin = System.nanoTime();
+
+        long tiempo = fin - inicio;
+
+        System.out.println(tiempo + " Busqueda ArrayList  Nanosegundos");
+
+        return preg;
+    }
+    /**
+     * 
+     * @param 
+     * @param id por el cual se busca
+     * @return 
+     */
+    public Pregunta busquedaenArbol(int cantidadPregunta, String id) {
+        TreeSet<Pregunta> treeSet = new TreeSet<>();
+        Pregunta pregu = null;
+        long inicio = System.nanoTime();
+        for (int i = 0; i < cantidadPregunta; i++) {
+            treeSet.add(bancoPreguntas.get(i));
+        }
+        for (Iterator it = treeSet.iterator(); it.hasNext();) {
+            Pregunta pregunta = (Pregunta) it.next();
+            if(pregunta.getTexto().equalsIgnoreCase(id)){
+                pregu = new Pregunta(pregunta.getTexto(), pregunta.getDificultad(), pregunta.getTiempo(), pregunta.getTema_id(), pregunta.getFECHA_CREACION());
+            }
+        }
+        long fin = System.nanoTime();
+
+        long tiempo = fin - inicio;
+
+        System.out.println(tiempo + "Busqueda Arbol  Nanosegundos");
+        
+        return pregu;
+    }
 }

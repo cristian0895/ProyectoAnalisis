@@ -9,6 +9,8 @@ import Controlador.CrearPreguntas;
 import Controlador.Evaluacion;
 import Modelo.Pregunta;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -66,6 +68,7 @@ public class Matriz extends javax.swing.JFrame {
         lblTotalBanco = new javax.swing.JLabel();
         btnCrearXPreguntas = new javax.swing.JButton();
         cbPreguntas = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblExamenes = new javax.swing.JTable();
@@ -179,6 +182,13 @@ public class Matriz extends javax.swing.JFrame {
 
         cbPreguntas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "100", "1000", "10000", "100000" }));
 
+        jButton1.setText("Pila");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -194,15 +204,18 @@ public class Matriz extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(btnCrearXPreguntas)
                         .addGap(70, 70, 70)
-                        .addComponent(cbPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(cbPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(jButton1)))
+                .addGap(0, 629, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCrearXPreguntas)
-                    .addComponent(cbPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
@@ -316,11 +329,11 @@ public class Matriz extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCrearExamenActionPerformed
 
     private void tblPreguntasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPreguntasMouseClicked
-        // TODO add your handling code here:
-        int i = tblPreguntas.rowAtPoint(evt.getPoint());
-        list.remove(i);
-        listarPreguntas();
-        lblTotalBanco.setText(list.size() + "");
+//        // TODO add your handling code here:
+//        int i = tblPreguntas.rowAtPoint(evt.getPoint());
+//        list.remove(i);
+//        listarPreguntas();
+//        lblTotalBanco.setText(list.size() + "");
     }//GEN-LAST:event_tblPreguntasMouseClicked
 
     private void tblExamenesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblExamenesMouseClicked
@@ -348,8 +361,29 @@ public class Matriz extends javax.swing.JFrame {
         cp = new CrearPreguntas(list,numPreguntas);
         cp.SolicitudListarArrayList();
         listarPreguntas();
+        
+        
         lblTotalBanco.setText(list.size() + "");
     }//GEN-LAST:event_btnCrearXPreguntasActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            int numPreguntas= Integer.parseInt(cbPreguntas.getSelectedItem().toString());
+            ev.crearenPilar(numPreguntas);
+            ev.crearenArray(numPreguntas);
+            ev.crearenArrayList(numPreguntas);
+            ev.crearenArbol(numPreguntas);
+            String pregun=JOptionPane.showInputDialog("Ingrese la pregunta");
+            Pregunta pregunta =ev.busquedaenArbol(numPreguntas, pregun);
+            if(pregunta!=null){
+                JOptionPane.showMessageDialog(null, "Elemento encontrado");
+            }else{
+                JOptionPane.showMessageDialog(null, "Elemento  NO encontrado");
+            }
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Matriz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -394,6 +428,7 @@ public class Matriz extends javax.swing.JFrame {
     private javax.swing.JButton btnCrearSalon;
     private javax.swing.JButton btnCrearXPreguntas;
     private javax.swing.JComboBox<String> cbPreguntas;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

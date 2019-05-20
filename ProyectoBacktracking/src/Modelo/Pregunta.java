@@ -11,10 +11,10 @@ import java.util.Date;
  *
  * @author HP
  */
-public class Pregunta {
-    
+public class Pregunta implements Comparable {
+
     String texto;
-    int dificultad,tiempo,tema_id;
+    int dificultad, tiempo, tema_id;
     String FECHA_CREACION;
 
     public Pregunta(String texto, int difiultad, int tiempo, int tema, String fechaCreacion) {
@@ -64,5 +64,19 @@ public class Pregunta {
     public void setFECHA_CREACION(String FECHA_CREACION) {
         this.FECHA_CREACION = FECHA_CREACION;
     }
-    
+
+    @Override
+    public int compareTo(Object objeto) {
+// Indica en base a que atributos se compara el objeto
+// Devuelve +1 si this es > que objeto
+// Devuelve -1 si this es < que objeto
+// Devuelve 0 si son iguales
+
+        Pregunta pregunta = (Pregunta) objeto;
+        String nombreObjeto = pregunta.texto.toLowerCase();
+        String nombreThis = this.texto.toLowerCase();
+
+        return (nombreThis.compareTo(nombreObjeto));
+    }
+
 }
