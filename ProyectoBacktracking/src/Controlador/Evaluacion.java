@@ -710,8 +710,7 @@ public class Evaluacion {
                 parcial = pesoMax;
             }
         }
-        double[] asd={2,2,2};
-        return asd;
+        return aux;
     }
     /**
      * 
